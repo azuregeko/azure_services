@@ -27,12 +27,12 @@ jobs:
             chmod +x $GITHUB_WORKSPACE/deploy/azureSqlServer.sh "${subscription}"
             $GITHUB_WORKSPACE/deploy/azureSqlServer.sh "${subscription}"
       
-      - name: Azure CLI - Create Azure SQL Databases
-        uses: azure/CLI@v1
-        with: 
-          azcliversion: 2.30.0
-          inlineScripts: |
-            subscription=${{ secrets.AZURE_SUBSCRIPTION }}
-            chmod +x $GITHUB_WORKSPACE/deploy/azureSqlDatabase.sh "${subscription}"
-            $GITHUB_WORKSPACE/deploy/azureSqlDatabase.sh "${subscription}"
+      # - name: Azure CLI - Create Azure SQL Databases
+      #   uses: azure/CLI@v1
+      #   with: 
+      #     azcliversion: 2.30.0
+      #     inlineScripts: |
+      #       subscription=${{ secrets.AZURE_SUBSCRIPTION }}
+      #       chmod +x $GITHUB_WORKSPACE/deploy/azureSqlDatabase.sh "${subscription}"
+      #       $GITHUB_WORKSPACE/deploy/azureSqlDatabase.sh "${subscription}"
     
