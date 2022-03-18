@@ -1,0 +1,37 @@
+name: azure cli and github actions
+
+on: 
+  workflow_call:
+    
+jobs:
+
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Azure Login
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+      
+      - name: Checkout
+        uses: actions/checkout@v1
+
+      - name: Azure CLI - Create SQL Server
+        uses: azure/CLI@V1
+        with:
+          azcliversion: 2.30.0
+          inlineScript: |
+            subscription=${{ secrets.AZURE_SUBSCRIPTION }}
+            chmod +x $GITHUB_WORKSPACE/deploy/azureSqlServer.sh "${subscription}"
+            $GITHUB_WORKSPACE/deploy/azureSqlServer.sh "${subscription}"
+      
+      - name: Azure CLI - Create Azure SQL Databases
+        uses: azure/CLI@V1
+        with: 
+          azcliversion: 2.30.0
+          inlineScripts: |
+            subscription=${{ secrets.AZURE_SUBSCRIPTION }}
+            chmod +x $GITHUB_WORKSPACE/deploy/azureSqlDatabase.sh "${subscription}"
+            $GITHUB_WORKSPACE/deploy/azureSqlDatabase.sh "${subscription}"
+    
