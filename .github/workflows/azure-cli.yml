@@ -2,7 +2,7 @@ name: azure cli and github actions
 
 on: 
   workflow_dispatch:
-    
+
     
 jobs:
 
@@ -19,7 +19,7 @@ jobs:
         uses: actions/checkout@v1
 
       - name: Azure CLI - Create SQL Server
-        uses: azure/CLI@V1
+        uses: azure/CLI@v1
         with:
           azcliversion: 2.30.0
           inlineScript: |
@@ -28,7 +28,7 @@ jobs:
             $GITHUB_WORKSPACE/deploy/azureSqlServer.sh "${subscription}"
       
       - name: Azure CLI - Create Azure SQL Databases
-        uses: azure/CLI@V1
+        uses: azure/CLI@v1
         with: 
           azcliversion: 2.30.0
           inlineScripts: |
