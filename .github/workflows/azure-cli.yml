@@ -25,7 +25,7 @@ jobs:
           inlineScript: |
             subscription=${{ secrets.AZURE_SUBSCRIPTION }}
             az account set $subscription
-            az sql server create -n myserver -g react-dev -l eastus2 -u ${{ secrets.AZURE_SQL_SERVER_USERNAME }} -p ${{ secrets.AZURE_SQL_SERVER_PASSWORD }}
+            az sql server create -n myserver -s $subscription -g react-dev -l eastus2 -u ${{ secrets.AZURE_SQL_SERVER_USERNAME }} -p ${{ secrets.AZURE_SQL_SERVER_PASSWORD }}
       
       # - name: Azure CLI - Create Azure SQL Databases
       #   uses: azure/CLI@v1
