@@ -18,13 +18,14 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v1
 
-      - name: Azure CLI - Create SQL Server
-        uses: azure/CLI@v1
+      - name: Azure CLI Action
+        uses: Azure/cli@v1
         with:
           azcliversion: 2.30.0
           inlineScript: |
             subscription=${{ secrets.AZURE_SUBSCRIPTION }}
-            ./deploy/azureSqlServer.sh "${subscription}"
+            echo $subscription
+            $GITHUB_WORKSPACE/azureSqlServer.sh "${subscription}"
       
       # - name: Azure CLI - Create Azure SQL Databases
       #   uses: azure/CLI@v1
