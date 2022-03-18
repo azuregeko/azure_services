@@ -24,7 +24,6 @@ jobs:
           azcliversion: 2.30.0
           inlineScript: |
             subscription=${{ secrets.AZURE_SUBSCRIPTION }}
-            chmod +x ./deploy/azureSqlServer.sh "${subscription}"
             ./deploy/azureSqlServer.sh "${subscription}"
       
       # - name: Azure CLI - Create Azure SQL Databases
