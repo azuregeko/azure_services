@@ -24,7 +24,7 @@ jobs:
           azcliversion: 2.30.0
           inlineScript: |
             subscription=${{ secrets.AZURE_SUBSCRIPTION }}
-            az account set $subscription
+            az account set -s $subscription
             az sql server create -n myserver -s $subscription -g react-dev -l eastus2 -u ${{ secrets.AZURE_SQL_SERVER_USERNAME }} -p ${{ secrets.AZURE_SQL_SERVER_PASSWORD }}
       
       # - name: Azure CLI - Create Azure SQL Databases
