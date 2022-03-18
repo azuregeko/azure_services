@@ -24,8 +24,8 @@ jobs:
           azcliversion: 2.30.0
           inlineScript: |
             subscription=${{ secrets.AZURE_SUBSCRIPTION }}
-            echo $subscription
-            $GITHUB_WORKSPACE/azureSqlServer.sh "${subscription}"
+            az account set $subscription
+            az sql server create -n myServer -g react-dev -l eastus2 -u ${{ secret.AZURE_SQL_SERVER_USERNAME }} -p ${{ secret.AZURE_SQL_SERVER_PASSWORD }}
       
       # - name: Azure CLI - Create Azure SQL Databases
       #   uses: azure/CLI@v1
