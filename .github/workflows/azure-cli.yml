@@ -13,7 +13,7 @@ jobs:
       - name: Azure Login
         uses: azure/login@v1
         with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
+          creds: ${{ secrets.AZURE_AD_SUBS_LEVEL }}
       
       - name: Checkout
         uses: actions/checkout@v1
@@ -25,7 +25,8 @@ jobs:
           inlineScript: |
             subscription=${{ secrets.AZURE_SUBSCRIPTION }}
             az account set -s $subscription
-            az sql server create -n essilordevserverrebo -g react-dev -l eastus2 -u ${{ secrets.AZURE_SQL_SERVER_USERNAME }} -p ${{ secrets.AZURE_SQL_SERVER_PASSWORD }}
+            az group create -l eastus2 -n az-templates
+      #     az sql server create -n essilordevserverrebo -g react-dev -l eastus2 -u ${{ secrets.AZURE_SQL_SERVER_USERNAME }} -p ${{ secrets.AZURE_SQL_SERVER_PASSWORD }}
       
       # - name: Azure CLI - Create Azure SQL Databases
       #   uses: azure/CLI@v1
