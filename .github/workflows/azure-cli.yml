@@ -1,4 +1,4 @@
-name: azure cli and github actions
+name: dev
 
 on: 
   workflow_dispatch:
