@@ -29,7 +29,6 @@ jobs:
             -u ${{ secrets.AZURE_SQL_SERVER_USERNAME }} \
             -p ${{ secrets.AZURE_SQL_SERVER_PASSWORD }} \
             -s cf4cdc06-8276-4cf4-9dff-2302037dabea \
-            --aad-admin-group-object-ids "cf3469c5-0c5a-4671-b537-fe059db402d6" \
             --aad-tenant-id "c7d1a8f7-0546-4a0c-8cf5-3ddaebf97d51" \
             --enable-azure-rbac \
             --enable-aad
