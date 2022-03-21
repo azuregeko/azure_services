@@ -18,13 +18,19 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v1
 
+      - name: Echo env
+        if: github.ref == 'ref/heads/main'
+        run: |
+          echo "Environment=dev" >> $GITHUB_ENV
+          
       - name: Create RG
         uses: azure/cli@v1
         with:
           azcliversion: 2.30.0
           inlineScript: |
-            chmod +x $GITHUB_WORKSPACE/deploy/AzureCreateRG.sh
-            $GITHUB_WORKSPACE/deploy/AzureCreateRG.sh
+            echo $Environment
+            chmod +x $GITHUB_WORKSPACE/deploy/$Environment/AzureCreateRG.sh
+            $GITHUB_WORKSPACE/deploy/$Environment/AzureCreateRG.sh
             
       - name: Azure CLI Action
         uses: azure/cli@v1
