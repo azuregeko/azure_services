@@ -18,7 +18,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v1
 
-      - name: Azure CLI Create RG
+      - name: Create RG
         uses: azure/cli@v1
         with:
           azcliversion: 2.30.0
