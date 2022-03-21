@@ -23,14 +23,6 @@ jobs:
         with:
           azcliversion: 2.30.0
           inlineScript: |
-            az sql server create -n essilordevserverrebo \
-            -g rg-4pc-dev \
-            -l eastus2 \
-            -u ${{ secrets.AZURE_SQL_SERVER_USERNAME }} \
-            -p ${{ secrets.AZURE_SQL_SERVER_PASSWORD }} \
-            -s cf4cdc06-8276-4cf4-9dff-2302037dabea \
-            --aad-tenant-id "c7d1a8f7-0546-4a0c-8cf5-3ddaebf97d51" \
-            --enable-azure-rbac \
-            --enable-aad
+            az sql server create -n essilordevserverrebo -g rg-4pc-dev -l eastus2 -u ${{ secrets.AZURE_SQL_SERVER_USERNAME }} -p ${{ secrets.AZURE_SQL_SERVER_PASSWORD }} --aad-tenant-id "c7d1a8f7-0546-4a0c-8cf5-3ddaebf97d51" --enable-azure-rbac --enable-aad
           
       
