@@ -1,1 +1,1 @@
-az group create -l eastus2 -n $rg_dev
+az group create --location westus --resource-group MyResourceGroup1
