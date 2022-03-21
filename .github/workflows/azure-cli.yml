@@ -14,7 +14,13 @@ jobs:
       #  uses: azure/login@v1
       #  with:
       #    creds: ${{ secrets.AZURE_AD_SUBS_LEVEL }}
-      
+      - name: Azure Login
+        uses: azure/login@v1
+        with:
+          azcliversion: 2.30.0
+          inlineScript: |
+            az login -u ${{ secrets.AZURE_AD_USERNAME }} -p ${{ secrets.AZURE_AD_PASSWORD }}
+            
       - name: Checkout
         uses: actions/checkout@v1
 
