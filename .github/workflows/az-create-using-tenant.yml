@@ -1,26 +1,31 @@
-name: Create resources using tenant ID
+name: azure cli and github actions
 
-on:
+on: 
   workflow_dispatch:
 
+    
 jobs:
-  
+
   build-and-deploy:
     runs-on: ubuntu-latest
-    
+
     steps:
-      - name: Checkout
-        uses: action/checkout@v1
-      
-      - name: create sql server using az tenant ID
-        uses: azure/cli@v1
+      - name: Azure Login
+        uses: azure/login@v1
         with:
-         azcliversion: 2.30.0
-         inlineScript: |
-          az sql server create -n essilordevserverrebo -g react-dev -l eastus2 \
-          -s cf4cdc06-8276-4cf4-9dff-2302037dabea
-          -u ${{ secrets.AZURE_SQL_SERVER_USERNAME }} \
-          -p ${{ secrets.AZURE_SQL_SERVER_PASSWORD }} \
-          --aad-admin-group-object-ids "cf3469c5-0c5a-4671-b537-fe059db402d6" \
-          --aad-tenant-id "c7d1a8f7-0546-4a0c-8cf5-3ddaebf97d51"
+          creds: ${{ secrets.AZURE_AD_SUBS_LEVEL }}
+      
+      - name: Checkout
+        uses: actions/checkout@v1
+
+      - name: Azure CLI - Create Azure SQL Databases
+        uses: azure/CLI@v1
+        with: 
+          azcliversion: 2.30.0
+          inlineScripts: |
+            subscription=${{ secrets.AZURE_SUBSCRIPTION }}
+            chmod +x $GITHUB_WORKSPACE/deploy/azureSqlDatabase.sh "${subscription}"
+            $GITHUB_WORKSPACE/deploy/azureSqlDatabase.sh "${subscription}"
+
+          
       
