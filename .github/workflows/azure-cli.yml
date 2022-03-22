@@ -18,11 +18,17 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v1
 
+      - name: set env
+        if: ${{ $GITHUB_REF == 'refs/head/main' }}
+        run: |
+          echo "ENVIRONMENT=dev" >> $GITHUB_ENV
+          echo "$GITHUB_ENV"
+
       - name: Az CLI
         run: |
           param="testing"
-          chmod +x $GITHUB_WORKSPACE/deploy/CreateResources.sh
-          $GITHUB_WORKSPACE/deploy/CreateResources.sh
+          chmod +x $GITHUB_WORKSPACE/deploy/CreateResources.sh "${param}"
+          $GITHUB_WORKSPACE/deploy/CreateResources.sh "${param}"
         #  $GITHUB_WORKSPACE/deploy/CreateResources.sh "${param}""
         # uses: azure/cli@v1
         # with:
