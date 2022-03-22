@@ -24,14 +24,14 @@ else
     echo "$sqlserver was successfully created"
 fi
 
-sqldatabase_etm=$(az sql db list -r $rg -s $sqlserver --query "[?name=='sqldatabase_etm'].name" -o tsv)
+sqldatabase_etm=$(az sql db list -s $sqlserver --query "[?name=='4PC-Core-ETM-DEV'].name" -o tsv)
 
-if [ "$sqldatabase_etm" = "sqldatabase_etm" ];
+if [ "$sqldatabase_etm" = "4PC-Core-ETM-DEV" ];
 then
     echo "$sqldatabase_etm already exists"
 else
-    az sql server create -g $rg -s $sqlserver -n etm-dev Basic
-    sqldatabase_etm=$(az sql db list -r $rg -s $sqlserver --query "[?name=='sqldatabase_etm'].name" -o tsv)
-    az sql db list -r $rg -s $sqlserver --query "[?name=='sqldatabase_etm'].name" -o tsv
+    az sql db create -g $rg -s $sqlserver -n etm-dev Basic
+    sqldatabase_etm=$(az sql db list -r $rg -s $sqlserver --query "[?name=='4PC-Core-ETM-DEV'].name" -o tsv)
+    az sql db list -r $rg -s $sqlserver --query "[?name=='4PC-Core-ETM-DEV'].name" -o tsv
     echo "$sqldatabase_etm was successfully created"
 fi
