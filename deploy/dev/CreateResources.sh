@@ -1,19 +1,35 @@
-testing="123"
-echo "$testing is found"
-az group list -o table
+rg=$(az group list --query "[?name=='dev-rg'].name" -o tsv)
 
-rg=$(az group list --query "[?name=='react-dev'].name" -o tsv)
-
-
-if [ "$rg" = "react-dev" ];
+if [ "$rg" = "dev-rg" ];
 then
-    echo "$rg is exists"
+    az group list -o table
+    echo "$rg is already exists"
 else
-    echo "$rg does not exists"
+    az group create -l eastus -n dev-rg
+    rg=$(az group list --query "[?name=='dev-rg'].name" -o tsv)
+    az group list -o table
+    echo "$rg was successfully created"
 fi
-# then
-#     echo "resource group $rg exists"
-# else
-#     az group create -l eastus2 -n azure-cli-actions
-#     rg_created=$(az group list --query "[?name=='azure-cli-actions'].name" -o tsv)
-#     echo "resource group $rg_created was created"
+
+sqlserver=$(az sql server list --query "[?name=='luxdevsqlserver'].name" -o tsv)
+
+if [ "$sqlserver" = "luxdevsqlserver" ];
+then
+    az sql server list -o table
+    echo "$sqlserver already exists"
+else
+    az sql server create -l eastus -n luxdevsqlserver
+    sqlserver=$(az sql server list --query "[?name=='luxdevsqlserver'].name" -o tsv)
+    az sql server list -o table
+    echo "$sqlserver was successfully created"
+
+sqldatabase_etm=$(az sql db list -r $rg -s $sqlserver --query "[?name=='sqldatabase_etm'].name" -o tsv)
+
+if [ "$sqldatabase_etm" = "sqldatabase_etm" ];
+then
+    echo "$sqldatabase_etm already exists"
+else
+    az sql server create -g $rg -s $sqlserver -n etm-dev Basic
+    sqldatabase_etm=$(az sql db list -r $rg -s $sqlserver --query "[?name=='sqldatabase_etm'].name" -o tsv)
+    az sql db list -r $rg -s $sqlserver --query "[?name=='sqldatabase_etm'].name" -o tsv
+    echo "$sqldatabase_etm was successfully created"
