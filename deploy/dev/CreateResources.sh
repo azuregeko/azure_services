@@ -1,6 +1,9 @@
 testing="123"
 echo "$testing is found"
 az group list -o table
+
+rg=$(az group list --query "[?name=='react-dev'].name" -o tsv)
+echo "$rg is exists"
 #az group list --query "[?name=='react-dev'].name" -o tsv
 # if [$rg == 'react-dev']
 # then
