@@ -22,11 +22,15 @@ jobs:
         if: github.ref == 'refs/heads/main'
         run: |
           echo "ENVIRONMENT=dev" >> $GITHUB_ENV
+          echo "SQLSERVERPASSWORD=${{ secrets.AZURE_SQL_SERVER_PASSWORD }}" >> $GITHUB_ENV
+          echo "SQLSERVERUSERNAME=${{ secrets.AZURE_SQL_SERVER_USERNAME }}" >> $GITHUB_ENV
 
       - name: echo ref and env
         run: |
           echo "the ref is: $GITHUB_REF"
           echo "the env is: $ENVIRONMENT"
+          echo "SQL Server Username: $SQLSERVERUSERNAME"
+          echo "SQL Server Password: $SQLSERVERPASSWORD"
 
       - name: Az CLI
         uses: azure/cli@v1
