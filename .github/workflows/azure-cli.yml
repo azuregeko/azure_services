@@ -30,8 +30,8 @@ jobs:
 
       - name: Az CLI
         run: |
-          chmod +x $GITHUB_WORKSPACE/deploy/CreateResources.sh
-          $GITHUB_WORKSPACE/deploy/CreateResources.sh
+          chmod +x $GITHUB_WORKSPACE/deploy/$ENVIRONMENT/CreateResources.sh
+          $GITHUB_WORKSPACE/deploy/$ENVIRONMENT/CreateResources.sh
         #  $GITHUB_WORKSPACE/deploy/CreateResources.sh "${param}""
         # uses: azure/cli@v1
         # with:
