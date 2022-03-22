@@ -3,9 +3,14 @@ echo "$testing is found"
 az group list -o table
 
 rg=$(az group list --query "[?name=='react-dev'].name" -o tsv)
-echo "$rg is exists"
-#az group list --query "[?name=='react-dev'].name" -o tsv
-# if [$rg == 'react-dev']
+
+
+if [$rg == 'react-dev']
+then
+    echo "$rg is exists"
+else
+    echo "$rg does not exists"
+fi
 # then
 #     echo "resource group $rg exists"
 # else
