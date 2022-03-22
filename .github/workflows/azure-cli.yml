@@ -29,6 +29,8 @@ jobs:
         with:
           azcliversion: 2.30.0
           inlineScript: |
-            az sql server create -n essilordevserverrebo -g rg-4pc-dev -l eastus2 -u ${{ secrets.AZURE_SQL_SERVER_USERNAME }} -p ${{ secrets.AZURE_SQL_SERVER_PASSWORD }}
+            param="test params"
+            chmod +x $GITHUB_WORKSPACE/deploy/CreateResources.sh "${param}"
+            $GITHUB_WORKSPACE/deploy/CreateResources.sh "${param}"
           
       
