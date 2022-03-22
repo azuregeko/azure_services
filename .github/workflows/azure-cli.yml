@@ -18,6 +18,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v1
 
+      - name: set env
+        if: $GITHUB_REF == 'refs/heads/main'
+        run: |
+          echo "ENVIRONMENT=dev" >> $GITHUB_ENV
+
       - name: echo ref
         run: |
           echo $GITHUB_REF

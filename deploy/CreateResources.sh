@@ -1,3 +1,4 @@
 param="testing"
-echo "the parameter is - $param"
+echo "the env is $ENVIRONMENT"
+echo "the ref is $GITHUB_REF"
 
