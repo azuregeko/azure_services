@@ -63,6 +63,7 @@ then
 else
     az storage account create -n corecontentdev -g $rg -l eastus --sku Standard_LRS
     storageaccount=$(az storage account list -g $rg --query "[?name=='corecontentdev']".name -o tsv)
+    az storage account list -g $rg
     echo "$storageaccount was succesfully created"
 fi
 
