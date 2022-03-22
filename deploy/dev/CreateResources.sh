@@ -11,7 +11,7 @@ else
     echo "$rg was successfully created"
 fi
 
-az group list
+az group list -o table
 
 #Create SQL Server
 echo "Create SQL Server - $ENVIRONMENT"
