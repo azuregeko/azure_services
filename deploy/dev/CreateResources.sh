@@ -56,7 +56,7 @@ fi
 #Create Storage Account
 storageaccount=$(az storage account list -g $rg --query "[?name=='corecontentdev']".name -o tsv)
 
-if [ "$storageaccount" = "corecontentdev"];
+if [ "$storageaccount" = "corecontentdev" ];
 then
     az storage account list -g $rg
     echo "$storageaccount already exists"
