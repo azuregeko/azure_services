@@ -23,9 +23,10 @@ jobs:
         run: |
           echo "ENVIRONMENT=dev" >> $GITHUB_ENV
 
-      - name: echo ref
+      - name: echo ref and env
         run: |
-          echo $GITHUB_REF
+          echo "the ref is: $GITHUB_REF"
+          echo "the env is: $GITHUB_ENV"
 
       - name: Az CLI
         run: |
