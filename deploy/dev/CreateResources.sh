@@ -1,6 +1,7 @@
 testing="123"
 echo "$testing is found"
-# rg=$(az group list --query "[?name=='react-dev'].name" -o tsv)
+az group list -o table
+#az group list --query "[?name=='react-dev'].name" -o tsv
 # if [$rg == 'react-dev']
 # then
 #     echo "resource group $rg exists"
