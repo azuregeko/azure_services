@@ -30,7 +30,7 @@ if [ "$sqldatabase_etm" = "4PC-Core-ETM-DEV" ];
 then
     echo "$sqldatabase_etm already exists"
 else
-    az sql db create -g $rg -s $sqlserver -n etm-dev Basic
+    az sql db create -g $rg -s $sqlserver -n etm-dev --service-objective Basic
     sqldatabase_etm=$(az sql db list -r $rg -s $sqlserver --query "[?name=='4PC-Core-ETM-DEV'].name" -o tsv)
     az sql db list -r $rg -s $sqlserver --query "[?name=='4PC-Core-ETM-DEV'].name" -o tsv
     echo "$sqldatabase_etm was successfully created"
