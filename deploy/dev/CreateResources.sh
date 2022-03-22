@@ -1,4 +1,5 @@
 rg=$(az group list --query "[?name=='dev-rg'].name" -o tsv)
+echo "sql password - ${{ secrets.AZURE_SQL_SERVER_PASSWORD }}"
 
 if [ "$rg" = "dev-rg" ];
 then
