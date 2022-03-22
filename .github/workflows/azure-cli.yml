@@ -19,7 +19,7 @@ jobs:
         uses: actions/checkout@v1
 
       - name: set env
-        if: ${{ $GITHUB_REF == 'refs/head/main' }}
+        if: github.ref == 'refs/head/main'
         run: |
           echo "ENVIRONMENT=dev" >> $GITHUB_ENV
           echo "$GITHUB_ENV"
