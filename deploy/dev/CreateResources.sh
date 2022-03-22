@@ -5,7 +5,7 @@ az group list -o table
 rg=$(az group list --query "[?name=='react-dev'].name" -o tsv)
 
 
-if [ "$rg" = "react-dev" ]
+if [ "$rg" = "react-dev" ];
 then
     echo "$rg is exists"
 else
