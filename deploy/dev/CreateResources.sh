@@ -58,12 +58,12 @@ storageaccount=$(az storage account list -g $rg --query "[?name=='corecontentdev
 
 if [ "$storageaccount" = "corecontentdev" ];
 then
-    az storage account list -g $rg
+    az storage account list -g $rg -o table
     echo "$storageaccount already exists"
 else
     az storage account create -n corecontentdev -g $rg -l eastus --sku Standard_LRS
     storageaccount=$(az storage account list -g $rg --query "[?name=='corecontentdev']".name -o tsv)
-    az storage account list -g $rg
+    az storage account list -g $rg -o table
     echo "$storageaccount was succesfully created"
 fi
 
