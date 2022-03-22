@@ -18,7 +18,7 @@ then
     az sql server list -o table
     echo "$sqlserver already exists"
 else
-    az sql server create -l eastus -n luxdevsqlserver
+    az sql server create -g $rg -l eastus -n luxdevsqlserver -u ${{ secrets.AZURE_SQL_SERVER_USERNAME }} -p ${{ secrets.AZURE_SQL_SERVER_PASSWORD }}
     sqlserver=$(az sql server list --query "[?name=='luxdevsqlserver'].name" -o tsv)
     az sql server list -o table
     echo "$sqlserver was successfully created"
