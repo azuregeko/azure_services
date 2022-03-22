@@ -11,7 +11,7 @@ else
     echo "$rg was successfully created"
 fi
 
-az sql db list -g $rg -s $sqlserver -o table
+az group list
 
 #Create SQL Server
 echo "Create SQL Server - $ENVIRONMENT"
@@ -30,6 +30,7 @@ az sql server list -o table
 
 #Create ETM SQL Database
 echo "Create ETM SQL Database - $ENVIRONMENT"
+
 sqldatabase_etm=$(az sql db list -g $rg -s $sqlserver --query "[?name=='4PC-Core-ETM-DEV'].name" -o tsv)
 
 if [ "$sqldatabase_etm" = "4PC-Core-ETM-DEV" ];
