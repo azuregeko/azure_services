@@ -40,6 +40,14 @@ jobs:
             chmod +x $GITHUB_WORKSPACE/deploy/$ENVIRONMENT/CreateResources.sh
             $GITHUB_WORKSPACE/deploy/$ENVIRONMENT/CreateResources.sh
 
+      - name: Az CLI - AKS and ACR
+        uses: azure/cli@v1
+        with:
+          azcliversion: 2.30.0
+          inlineScript: |
+            chmod +x $GITHUB_WORKSPACE/deploy/$ENVIRONMENT/Aks.sh
+            $GITHUB_WORKSPACE/deploy/$ENVIRONMENT/Aks.sh
+            
       - name: az logout
         run: |
           az logout
