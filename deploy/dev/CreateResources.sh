@@ -76,7 +76,7 @@ az storage account list -g $rg -o table
 
 
 #CLEAN UP CREATED RESOURCES
-az group delete -g $rg
+az group delete -g $rg --yes
 
 
 
