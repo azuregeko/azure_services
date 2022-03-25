@@ -1,17 +1,16 @@
 #Create Resource Group
 echo "Create Resource Group - $ENVIRONMENT"
-rg=$(az group list --query "[?name=='dev-rg'].name" -o tsv)
+#rg=$(az group list --query "[?name=='dev-rg'].name" -o tsv)
+rg="dev-rg"
+rg_exists=$(az group exists -n $rg)
 
-if [ "$rg" = "dev-rg" ];
+if [ $rg_exists = true ];
 then
     echo "$rg already exists."
 else
     az group create -l eastus -n dev-rg
-    rg=$(az group list --query "[?name=='dev-rg'].name" -o tsv)
     echo "$rg was successfully created"
 fi
-
-az group list -o table
 
 #Create SQL Server
 echo "Create SQL Server - $ENVIRONMENT"
@@ -25,8 +24,6 @@ else
     sqlserver=$(az sql server list --query "[?name=='luxdevsqlserver'].name" -o tsv)
     echo "$sqlserver was successfully created"
 fi
-
-az sql server list -o table
 
 #Create ETM SQL Database
 echo "Create ETM SQL Database - $ENVIRONMENT"
@@ -43,8 +40,6 @@ else
     echo "$sqldatabase_etm was successfully created"
 fi
 
-az sql db list -g $rg -s $sqlserver -o table
-
 #Create EUS SQL Database
 echo "Create EUS SQL Database - $ENVIRONMENT"
 sqldatabase_eus=$(az sql db list -g $rg -s $sqlserver --query "[?name=='4PC-Core-EUS-DEV']".name -o tsv)
@@ -58,7 +53,7 @@ else
     echo "$sqldatabase_eus was successfully created"
 fi
 
-az sql db list -g $rg -s $sqlserver -o table
+
 
 #Create Storage Account
 echo "Create Storage Account - $ENVIRONMENT"
@@ -74,6 +69,14 @@ else
     echo "$storageaccount was succesfully created"
 fi
 
+az group list -o table
+az sql server -g $rg list -o table
+az sql db list -g $rg -s $sqlserver -o table
 az storage account list -g $rg -o table
+
+
+#CLEAN UP CREATED RESOURCES
+az group delete -g $rg
+
 
 

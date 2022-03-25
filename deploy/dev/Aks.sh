@@ -1,12 +1,15 @@
 rg="aks-management"
-aks=$(az aks list -g $rg --query "[?name=='AKS-ESSLUX'].name" -o tsv)
+aks=$(az aks list -g $rg --query "[?name=='acrEssiLux'].name" -o tsv)
 
 #Create ACR - DEV
-acrId=$(az acr show -g $rg -n acrEssiLux --query id -o tsv)
-if [ "$acrId" = "acrEssiLux" ];
+#acrId=$(az acr show -g $rg -n acrEssiLux --query id -o tsv)
+
+acrId=$(az acr check-name -n acrEssiLux --query nameAvailable -o tsv)
+if [ $acrId = true ];
 then
     echo "$acrId already exists!"
 else
+    az deployment group create -g $rg --template-file ./azure-infra.bicep
     az acr create -g $rg -n acrEssiLux --sku Basic -l eastus --allow-trusted-services true
     acrName='acrEssiLux'
     echo "$acrId is successfully created"
@@ -27,7 +30,7 @@ fi
 
 
 #Check AKS and ACR Connection
-acrLoginServer=$(az acr show -g $rg -n $acrName)
+acrLoginServer=$(az acr show -g $rg -n acrEssiLux --query loginServer -o tsv)
 az aks check-acr -g $rg -n $aks --acr $acrLoginServer
 
 

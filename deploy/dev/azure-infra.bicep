@@ -1,6 +1,8 @@
+param acrName string = 'azureAcrRebo'
+param location string = 'location'
 resource acr 'Microsoft.ContainerRegistry/registries@2021-12-01-preview' = {
-  name: 'azEssLux'
-  location: 'eastus'
+  name: acrName
+  location: location
   sku: {
     name: 'Basic'
   }
