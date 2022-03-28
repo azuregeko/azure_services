@@ -70,7 +70,7 @@ else
 fi
 
 az group list -o table
-az sql server -g $rg list -o table
+az sql server list -g $rg -o table
 az sql db list -g $rg -s $sqlserver -o table
 az storage account list -g $rg -o table
 
